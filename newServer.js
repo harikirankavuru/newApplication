@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 // Create application/x-www-form-urlencoded parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
+app.set('port', process.env.PORT || 1345);
 var emp=[{
    empno: "0001",
    empname : "Hari",
@@ -122,4 +123,4 @@ app.get("/empdetails",function(req,res){
    res.send(JSON.stringify(emp));
 });
 
-var server = app.listen(8081);
+var server = app.listen(app.get("port"));

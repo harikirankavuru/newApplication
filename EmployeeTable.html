@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <link rel="shortcut icon" href="Bullhorn-Logo.jpg"/>
+    <meta name="viewport" content="width=device-width, initial-scale="1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script>
+      	$(document).ready(function(){
+      		jQuery.get("/empdetails",function(data,status){
+      			var emp=JSON.parse(data);
+      			//$("#tbody").empty();
+                for(var i=0;i<emp.length;i++){
+                	var txt="<tr><th>"+emp[i].empno+"</th>";
+                	txt+="<th>"+emp[i].empname+"</th>";
+                	txt+="<th>"+emp[i].phone+"</th>";
+                	txt+="<th>"+emp[i].address+"</th>";
+                	txt+="<th>"+emp[i].dob+"</th>";
+                	txt+="<th>"+emp[i].ms+"</th></tr>";
+                	$("#tbody").append(txt);
+                }
+      		});
+      	});
+      </script>
+</head>
+
+<body>
+<div class="container">
+	<div class="table-responsive">
+		<h1>Details of Employee's</h1>
+		<table id="empTable" class="table table-inverse table-hover table-condensed ">
+			<thead style="background-color:#ffd1b3">
+			<tr>
+				<th>Employee Number</th>
+				<th>Employee Name</th>
+				<th>Phone</th>
+				<th>Address</th>
+				<th>Date of Birth</th>
+				<th>Maratial status</th>
+			</tr>
+		    </thead>
+		    <tbody id="tbody">
+		    </tbody>
+		    
+		</table>
+	</div>
+</div>
+
+</script>
+</body>
+</html>

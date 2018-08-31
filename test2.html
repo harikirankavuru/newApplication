@@ -1,0 +1,51 @@
+<html>
+<head>
+		 <link rel="shortcut icon" href="Bullhorn-Logo.jpg"/>
+    <meta name="viewport" content="width=device-width, initial-scale="1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+</head>
+<body>
+	<div class="row">
+		<div class="col-lg-4">
+<form>
+	<input id='name' list="json-datalist" type='text' autocomplete="off" /><br/>
+  <datalist id="json-datalist"></datalist>
+  <button type="button" id="empButton">Employee Details</button>&nbsp;&nbsp;<button type="button" id="RemoveButton">Show/Hide Employee Details</button>
+  
+</form>
+</div>
+<div class="col-lg-8">
+<div id="output2"></div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+    $("[id='name']").keypress(function(){
+      $.get("/process_post/?name="+$("#name").val(),function(data,status){
+        var obj=JSON.parse(data);
+        $("#json-datalist").empty();
+        for(var i=0;i<obj.length;i++){
+            var option1=document.createElement('option');
+            option1.label=obj[i].label;
+            option1.value=obj[i].value;
+            $("#json-datalist").append(option1);
+        }
+
+      });
+    });
+    $("#empButton").click(function(){
+    	$("#output2").show();
+           $("#output2").load("/employeetable");
+    });
+    $("#RemoveButton").click(function(){
+           $("#output2").toggle();
+    });
+});
+
+  </script>
+</body>
+</html>
